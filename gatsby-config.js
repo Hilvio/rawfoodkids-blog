@@ -1,13 +1,17 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: `Kyle Mathews`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    title: `Raw Food Kids`,
+    author: `Lucia Hirvi`,
+    description: `A raw vegan food blog`,
+    siteUrl: `https://rawfoodkids.netlify.com/`,
     social: {
-      twitter: `kylemathews`,
+      instagram: `rawfoodkids`,
     },
   },
   plugins: [
