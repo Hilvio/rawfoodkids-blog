@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import moment from "moment";
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -36,6 +37,7 @@ const BlogIndex = ({ data, location }) => {
                 }}
               />
             </section>
+            <p>{moment(node.createdAt).format('DD/MM/YYYY')}</p>
           </article>
         )
       })}
@@ -58,6 +60,7 @@ export const pageQuery = graphql`
           title
           subtitle
           slug
+          createdAt
         }
       }
     }

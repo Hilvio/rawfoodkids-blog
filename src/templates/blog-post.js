@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import moment from "moment";
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -38,6 +39,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         />
         {img}
         {documentToReactComponents(post.content.json)}
+        <p>{moment(post.createdAt).format('DD/MM/YYYY')}</p>
         <footer>
           <Bio />
         </footer>
@@ -94,6 +96,7 @@ export const pageQuery = graphql`
          src
         }
       }
+      createdAt
     }
   }
 `
