@@ -14,7 +14,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
-  const img = post.image ? <img src={post.image.fluid.src}/> : '';
+  const img = post.image ? <img src={post.image.fluid.src} /> : undefined;
 
   const options = {
     renderNode: {
@@ -31,28 +31,20 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       />
       <article>
         <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
+          <h1 style={{ marginTop: rhythm(1), marginBottom: 0 }}>
             {post.title}
           </h1>
         </header>
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
+        <hr style={{ marginBottom: rhythm(1) }} />
         {img}
         {documentToReactComponents(post.content.json, options)}
-        <p>{moment(post.createdAt).format('DD/MM/YYYY')}</p>
+        <p>
+          {moment(post.createdAt).format('DD/MM/YYYY')}
+        </p>
         <footer>
           <Bio />
         </footer>
       </article>
-
       <nav>
         <ul
           style={{

@@ -15,34 +15,25 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
-      {posts.map(({ node }) => {
+      {posts.map(({ node }, index) => {
         const title = node.title || node.slug
         return (
           <article key={node.slug}>
             <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
+              <h3 style={{ marginBottom: rhythm(1 / 4) }}>
                 <Link style={{ boxShadow: `none` }} to={node.slug}>
                   {title}
                 </Link>
               </h3>
             </header>
+            <img src={node.image.fluid.src}/>
             <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.subtitle,
-                }}
-              />
+              <p dangerouslySetInnerHTML={{ __html: node.subtitle }} />
             </section>
-            <p>{moment(node.createdAt).format('DD/MM/YYYY')}</p>
-            <hr
-              style={{
-              marginBottom: rhythm(1),
-            }}
-        />
+            <p>
+              {moment(node.createdAt).format('DD/MM/YYYY')}
+            </p>
+            <hr style={{ marginBottom: rhythm(1) }} />
           </article>
         )
       })}
@@ -66,6 +57,11 @@ export const pageQuery = graphql`
           subtitle
           slug
           createdAt
+          image {
+            fluid {
+              src
+            }
+          }
         }
       }
     }
