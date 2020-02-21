@@ -10,7 +10,6 @@ import { rhythm } from "../utils/typography"
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allContentfulPost.edges
-  const img = node.image ? <img src={node.image.fluid.src}/> : undefined;
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -18,6 +17,7 @@ const BlogIndex = ({ data, location }) => {
       <Bio />
       {posts.map(({ node }) => {
         const title = node.title || node.slug
+        const img = node.image ? <img src={node.image.fluid.src}/> : undefined;
         return (
           <article key={node.slug}>
             <header>
