@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 import moment from "moment";
 
 import Bio from "../components/bio"
@@ -14,6 +15,13 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const { previous, next } = pageContext
 
   const img = post.image ? <img src={post.image.fluid.src}/> : '';
+
+  const options = {
+    renderNode: {
+      [BLOCKS.UL_LIST]: (node, children) => <ul style={{ marginLeft: "1em" }}>{children}</ul>,
+      [BLOCKS.LIST_ITEM]: (node, children) => <li style={{ marginLeft: "1em" }}>{children}</li>,
+    },
+  };
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -38,7 +46,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           }}
         />
         {img}
-        {documentToReactComponents(post.content.json)}
+        {documentToReactComponents(post.content.json, options)}
         <p>{moment(post.createdAt).format('DD/MM/YYYY')}</p>
         <footer>
           <Bio />
