@@ -38,6 +38,11 @@ const BlogIndex = ({ data, location }) => {
               />
             </section>
             <p>{moment(node.createdAt).format('DD/MM/YYYY')}</p>
+            <hr
+              style={{
+              marginBottom: rhythm(1),
+            }}
+        />
           </article>
         )
       })}
