@@ -20,15 +20,15 @@ const BlogIndex = ({ data, location }) => {
         const img = node.image ? <img src={node.image.fluid.src}/> : undefined;
         return (
           <article key={node.slug}>
+            {img}
             <header>
-              <h3 style={{ marginBottom: rhythm(1 / 4) }}>
+              <h3 style={{ marginTop: 0 }}>
                 <Link style={{ boxShadow: `none` }} to={node.slug}>
                   {title}
                 </Link>
               </h3>
             </header>
-            {img}
-            <section>
+            <section style={{ textAlign: "justify" }}>
               <p dangerouslySetInnerHTML={{ __html: node.subtitle }} />
             </section>
             <p>

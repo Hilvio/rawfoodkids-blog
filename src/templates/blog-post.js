@@ -37,7 +37,9 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         </header>
         <hr style={{ marginBottom: rhythm(1) }} />
         {img}
-        {documentToReactComponents(post.content.json, options)}
+        <div style={{ textAlign: "justify" }}>
+          {documentToReactComponents(post.content.json, options)}
+        </div>
         <p>
           {moment(post.createdAt).format('DD/MM/YYYY')}
         </p>

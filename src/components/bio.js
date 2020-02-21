@@ -36,8 +36,10 @@ const Bio = () => {
   return (
     <div
       style={{
+        alignItems: "center",
+        alignContent: "center",
         display: `flex`,
-        marginBottom: rhythm(2.5),
+        marginBottom: "1rem",
       }}
     >
       <Image
@@ -53,13 +55,13 @@ const Bio = () => {
           borderRadius: `50%`,
         }}
       />
-      <p>
-        Written by <strong>{author}</strong>.
-        {` `}
-        <a href={`https://instagram.com/${social.instagram}`}>
-          Follow on Instagram
-        </a>
-      </p>
+      <div style={{ verticalAlign: "middle"}}>
+          Written by <strong>{author}</strong>.
+          {` `}
+          <a href={`https://instagram.com/${social.instagram}`}>
+           Follow on Instagram
+          </a>
+      </div>
     </div>
   )
 }
