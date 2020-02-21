@@ -12,6 +12,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
+  const img = post.image ? <img src={post.image.fluid.src}/> : '';
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
@@ -34,9 +36,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             marginBottom: rhythm(1),
           }}
         />
-        {
-          documentToReactComponents(post.content.json)
-        }
+        {img}
+        {documentToReactComponents(post.content.json)}
         <footer>
           <Bio />
         </footer>
@@ -87,6 +88,11 @@ export const pageQuery = graphql`
       author
       content {
         json
+      }
+      image {
+        fluid {
+         src
+        }
       }
     }
   }
