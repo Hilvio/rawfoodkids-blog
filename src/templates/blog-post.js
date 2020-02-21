@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -33,9 +34,9 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             marginBottom: rhythm(1),
           }}
         />
-        <p>
-          {post.content.json.content[0].content[0].value}
-        </p>
+        {
+          documentToReactComponents(post.content.json)
+        }
         <footer>
           <Bio />
         </footer>
