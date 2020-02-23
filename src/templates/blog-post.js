@@ -14,7 +14,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
-  const img = post.image ? <img src={post.image.fluid.src} /> : undefined;
+  const img = post.image ? <img src={post.image.fluid.src} alt={post.image.title}/> : undefined;
 
   const options = {
     renderNode: {
@@ -93,6 +93,7 @@ export const pageQuery = graphql`
         json
       }
       image {
+        title
         fluid {
          src
         }

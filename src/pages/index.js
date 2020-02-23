@@ -17,7 +17,7 @@ const BlogIndex = ({ data, location }) => {
       <Bio />
       {posts.map(({ node }) => {
         const title = node.title || node.slug
-        const img = node.image ? <img src={node.image.fluid.src}/> : undefined;
+        const img = node.image ? <img src={node.image.fluid.src} alt={node.image.title}/> : undefined;
         return (
           <article key={node.slug}>
             {img}
@@ -62,6 +62,7 @@ export const pageQuery = graphql`
           slug
           createdAt
           image {
+            title
             fluid {
               src
             }
