@@ -64,11 +64,7 @@ export const pageQuery = graphql`
           image {
             title
             fluid {
-              base64
-    				  aspectRatio
-    				  src
-    				  srcSet
-    				  sizes
+              ...GatsbyContentfulFluid
             }
           }
         }
