@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import moment from "moment";
-
+import Img from "gatsby-image"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -17,12 +17,12 @@ const BlogIndex = ({ data, location }) => {
       <Bio />
       {posts.map(({ node }) => {
         const title = node.title || node.slug
-        const img = node.image ? <img src={node.image.fluid.src} alt={node.image.title}/> : undefined;
+        const img = node.image ? <Img fluid={node.image.fluid} alt={node.image.title}/> : undefined;
         return (
           <article key={node.slug}>
             {img}
             <header>
-              <h3 style={{ marginTop: 0 }}>
+              <h3 style={{ marginTop: 28 }}>
                 <Link style={{ boxShadow: `none` }} to={node.slug}>
                   {title}
                 </Link>
@@ -64,7 +64,11 @@ export const pageQuery = graphql`
           image {
             title
             fluid {
-              src
+              base64
+    				  aspectRatio
+    				  src
+    				  srcSet
+    				  sizes
             }
           }
         }
