@@ -58,7 +58,7 @@ const Bio = () => {
       <div style={{ verticalAlign: "middle"}}>
           Written by <strong>{author}</strong>.
           {` `}
-          <a href={`https://instagram.com/${social.instagram}`}>
+          <a href={`https://instagram.com/${social.instagram}`} target="_blank" rel="noopener noreferrer">
            Follow on Instagram
           </a>
       </div>
