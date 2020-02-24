@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import moment from "moment";
 import Img from "gatsby-image"
@@ -9,13 +9,21 @@ import { rhythm } from "../utils/typography"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allContentfulPost.edges
+  const allPosts = data.allContentfulPost.edges;
+  const [filteredPosts, setPosts] = useState(allPosts)
+  const handleOnChange = event => {
+    const posts = allPosts.filter(({ node }) => node.title.toLowerCase().includes(event.target.value.toLowerCase()));
+    setPosts(posts)
+  }
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
-      {posts.map(({ node }) => {
+      <div>
+      <input onChange={handleOnChange} style={{ border: "solid", borderWidth: "1px", borderColor: "#8194a7", width: "100%", padding: "0.5em", marginBottom: "1em" }} type="search" placeholder="Search for Recipes" />
+      </div>
+      {filteredPosts.map(({ node }) => {
         const title = node.title || node.slug
         const img = node.image ? <Img fluid={node.image.fluid} alt={node.image.title}/> : undefined;
         return (
