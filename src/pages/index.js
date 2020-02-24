@@ -21,12 +21,17 @@ const BlogIndex = ({ data, location }) => {
     }
   }
 
+  const handleOnFocus = event => {
+    event.target.value ='';
+    setPosts(allPosts);
+  }
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
       <div>
-      <input onChange={handleOnChange} onKeyDown={handleOnKeyDown} style={{ border: "solid", borderWidth: "1px", borderColor: "#8194a7", width: "100%", padding: "0.5em", marginBottom: "1em" }} type="search" placeholder="Search for Recipes" />
+      <input onChange={handleOnChange} onFocus={handleOnFocus} onKeyDown={handleOnKeyDown} style={{ border: "solid", borderWidth: "1px", borderColor: "#8194a7", width: "100%", padding: "0.5em", marginBottom: "1em" }} type="search" placeholder="Search for Recipes" />
       </div>
       {filteredPosts.map(({ node }) => {
         const title = node.title || node.slug
