@@ -15,13 +15,18 @@ const BlogIndex = ({ data, location }) => {
     const posts = allPosts.filter(({ node }) => node.title.toLowerCase().includes(event.target.value.toLowerCase()));
     setPosts(posts)
   }
+  const handleOnKeyDown = event => {
+    if (event.keyCode===13) {
+      event.target.blur();
+    }
+  }
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
       <div>
-      <input onChange={handleOnChange} style={{ border: "solid", borderWidth: "1px", borderColor: "#8194a7", width: "100%", padding: "0.5em", marginBottom: "1em" }} type="search" placeholder="Search for Recipes" />
+      <input onChange={handleOnChange} onKeyDown={handleOnKeyDown} style={{ border: "solid", borderWidth: "1px", borderColor: "#8194a7", width: "100%", padding: "0.5em", marginBottom: "1em" }} type="search" placeholder="Search for Recipes" />
       </div>
       {filteredPosts.map(({ node }) => {
         const title = node.title || node.slug
