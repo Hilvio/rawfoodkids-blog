@@ -1,8 +1,4 @@
-const dotenv = require('dotenv');
-
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
+require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
@@ -31,17 +27,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-gdpr-cookies`,
-      options: {
-        googleAnalytics: {
-          trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
-        },
-        facebookPixel: {
-          pixelId: process.env.FACEBOOK_PIXEL_ID,
-        },
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

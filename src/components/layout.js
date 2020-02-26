@@ -9,8 +9,7 @@ const Layout = ({ location, title, children }) => {
   let header
 
   const handleOnAccept = () => {
-    Cookies.set('gatsby-gdpr-google-analytics', true)
-    Cookies.set('gatsby-gdpr-facebook-pixel', true)
+    Cookies.set('google-analytics', true)
   }
 
   if (location.pathname === rootPath) {
