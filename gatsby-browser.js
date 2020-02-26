@@ -8,7 +8,7 @@ import ReactGA from 'react-ga';
 import { Cookies } from "react-cookie-consent";
 
 export const onClientEntry = () => {
-    ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKING_ID);
+    ReactGA.initialize(process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID);
   }
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
