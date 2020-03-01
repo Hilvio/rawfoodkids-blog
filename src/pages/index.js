@@ -48,7 +48,7 @@ const BlogIndex = ({ data, location }) => {
             <section style={{ textAlign: "justify" }}>
               <p dangerouslySetInnerHTML={{ __html: node.subtitle }} />
             </section>
-            <p>
+            <p style={{ color: "#808080", fontStyle: "italic", marginBottom: "1em" }}>
               {moment(node.createdAt).format('DD/MM/YYYY')}
             </p>
             <hr style={{ marginBottom: rhythm(1) }} />
