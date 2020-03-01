@@ -6,6 +6,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import Search from "../components/search"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -30,9 +31,7 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
-      <div>
-      <input onChange={handleOnChange} onFocus={handleOnFocus} onKeyDown={handleOnKeyDown} style={{ border: "solid", borderWidth: "1px", borderColor: "#8194a7", width: "100%", padding: "0.5em", marginBottom: "1em" }} type="search" placeholder="Search for Recipes" />
-      </div>
+      <Search handleOnChange={handleOnChange} handleOnFocus={handleOnFocus} handleOnKeyDown={handleOnKeyDown} />
       {filteredPosts.map(({ node }) => {
         const title = node.title || node.slug
         const img = node.image ? <Img fluid={node.image.fluid} alt={node.image.title}/> : undefined;
