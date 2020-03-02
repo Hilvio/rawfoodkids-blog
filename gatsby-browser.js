@@ -8,8 +8,12 @@ import ReactGA from 'react-ga';
 import { Cookies } from "react-cookie-consent";
 
 export const onClientEntry = () => {
+  const gaEnabled = Cookies.get('google-analytics')
+
+  if (gaEnabled) {
     ReactGA.initialize(process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID);
   }
+}
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
     const gaEnabled = Cookies.get('google-analytics')

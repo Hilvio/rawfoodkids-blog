@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import CookieConsent, { Cookies } from "react-cookie-consent";
+import ReactGA from 'react-ga';
 
 import { rhythm, scale } from "../utils/typography"
 
@@ -10,6 +11,7 @@ const Layout = ({ location, title, children }) => {
 
   const handleOnAccept = () => {
     Cookies.set('google-analytics', true)
+    ReactGA.initialize(process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID);
   }
 
   if (location.pathname === rootPath) {
