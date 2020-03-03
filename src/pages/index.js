@@ -20,7 +20,8 @@ const BlogIndex = ({ data, location }) => {
     }
   }
 
-  const handleOnFocus = () => {
+  const handleOnFocus = event => {
+    event.target.value ='';
     navigate("/")
     setPosts(allPosts);
   }
