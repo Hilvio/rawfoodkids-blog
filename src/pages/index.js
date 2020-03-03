@@ -1,12 +1,10 @@
-import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
-import moment from "moment";
-import Img from "gatsby-image"
+import React, { useEffect, useState } from "react"
+import { graphql, navigate } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
 import Search from "../components/search"
+import Post from "../components/post";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -22,39 +20,37 @@ const BlogIndex = ({ data, location }) => {
     }
   }
 
-  const handleOnFocus = event => {
-    event.target.value ='';
+  const handleOnFocus = () => {
+    navigate("/")
     setPosts(allPosts);
   }
+
+  useEffect(() => {
+
+    if (location.search) {
+      const searchParams = new URLSearchParams(location.search);
+      const searchWord = searchParams.get('search')
+      const posts = searchWord && allPosts.filter(({ node }) => {
+        const titleMatch = node.title.toLowerCase().includes(searchWord.toLowerCase());
+        const tagMatch = node.tags ? node.tags.map(tag => tag.trim()).includes(searchWord.trim()) : false;
+        console.log({ tags: node.tags, searchWord})
+        return  titleMatch || tagMatch;
+      });
+      setPosts(posts);
+    } else {
+      setPosts(allPosts)
+    }
+    
+  }, [ allPosts, location ]);
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
       <Search handleOnChange={handleOnChange} handleOnFocus={handleOnFocus} handleOnKeyDown={handleOnKeyDown} />
-      {filteredPosts.map(({ node }) => {
-        const title = node.title || node.slug
-        const img = node.image ? <Img fluid={node.image.fluid} alt={node.image.title}/> : undefined;
-        return (
-          <article key={node.slug}>
-            {img}
-            <header>
-              <h3 style={{ marginTop: 28 }}>
-                <Link style={{ boxShadow: `none` }} to={node.slug}>
-                  {title}
-                </Link>
-              </h3>
-            </header>
-            <section style={{ textAlign: "justify" }}>
-              <p dangerouslySetInnerHTML={{ __html: node.subtitle }} />
-            </section>
-            <p style={{ color: "#808080", fontStyle: "italic", marginBottom: "1em" }}>
-              {moment(node.createdAt).format('DD/MM/YYYY')}
-            </p>
-            <hr style={{ marginBottom: rhythm(1) }} />
-          </article>
-        )
-      })}
+      { 
+        filteredPosts.map(({ node }, index) => <Post {...(node)} key={index}/>)
+      }
     </Layout>
   )
 }
@@ -78,6 +74,7 @@ export const pageQuery = graphql`
           subtitle
           slug
           createdAt
+          tags
           image {
             title
             fluid {

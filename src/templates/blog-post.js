@@ -40,9 +40,14 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         <div style={{ textAlign: "justify" }}>
           {documentToReactComponents(post.content.json, options)}
         </div>
-        <p>
-          {moment(post.createdAt).format('DD/MM/YYYY')}
-        </p>
+        <div>
+          <p>
+          { post.tags && post.tags.map((tag, index) => <Link key={index} to={`?search=${tag}`} style={{ marginRight: "10px"}}>{tag}</Link>) }
+          </p>
+          <p style={{ color: "#808080", fontStyle: "italic" }}>
+            Posted: { moment(post.createdAt).format('DD/MM/YYYY') }
+          </p>
+        </div>
         <footer>
           <Bio />
         </footer>
@@ -99,6 +104,7 @@ export const pageQuery = graphql`
         }
       }
       createdAt
+      tags
     }
   }
 `
