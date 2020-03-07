@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { graphql, navigate } from "gatsby"
-import Bio from "../components/bio"
-import Layout from "../components/layout"
+import { graphql, navigate, Link } from "gatsby"
+import indexStyle from "./index.module.css"
+import Img from "gatsby-image"
 import SEO from "../components/seo"
 import Search from "../components/search"
-import Post from "../components/post";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -44,15 +43,37 @@ const BlogIndex = ({ data, location }) => {
     
   }, [ allPosts, location ]);
 
+  const NewPost = ({ createdAt, image, slug, subtitle, title }) => {
+    const header = title || slug
+    const img = image ? <Img className={indexStyle.recipeImage} fluid={image.fluid} alt={image.title}/> : undefined;
+
+    return (
+      <div className={indexStyle.recipe}>
+        <Link className={indexStyle.recipeLink} style={{ boxShadow: `none` }} to={slug}>
+          {img}
+          <h3 className={indexStyle.recipeTitle}>{title}</h3>
+        </Link>
+      </div>
+    )
+  }
+
   return (
-    <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      <Bio />
-      <Search handleOnChange={handleOnChange} handleOnFocus={handleOnFocus} handleOnKeyDown={handleOnKeyDown} />
-      { 
-        filteredPosts.map(({ node }, index) => <Post {...(node)} key={index}/>)
-      }
-    </Layout>
+    <div>
+      <SEO title="All recipes" />
+      <div className={indexStyle.header} />
+      <div className={indexStyle.container}>
+        <div className={indexStyle.subContainer}>
+          <h1 className={indexStyle.title}>Raw Food Kids</h1>
+          <h3 className={indexStyle.subTitle}>~ Vegan Recipes ~</h3>
+          <Search handleOnChange={handleOnChange} handleOnFocus={handleOnFocus} handleOnKeyDown={handleOnKeyDown} />
+          <div className={indexStyle.recipes}>
+            {
+              filteredPosts.map(({ node }, index) => <NewPost {...(node)} key={index}/>)
+            }
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
