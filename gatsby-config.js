@@ -27,7 +27,7 @@ module.exports = {
         short_name: `RFK`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#F48FB1`,
         display: "standalone",
         icon: `content/assets/icon.png`,
         crossOrigin: `use-credentials`,

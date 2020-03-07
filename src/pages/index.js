@@ -4,6 +4,8 @@ import indexStyle from "./index.module.css"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import Search from "../components/search"
+import CookieConsent, { Cookies } from "react-cookie-consent";
+import ReactGA from 'react-ga';
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -23,6 +25,11 @@ const BlogIndex = ({ data, location }) => {
     event.target.value ='';
     navigate("/")
     setPosts(allPosts);
+  }
+
+  const handleOnAccept = () => {
+    Cookies.set('google-analytics', true)
+    ReactGA.initialize(process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID);
   }
 
   useEffect(() => {
@@ -60,10 +67,13 @@ const BlogIndex = ({ data, location }) => {
   return (
     <div>
       <SEO title="All recipes" />
+      <CookieConsent style={{ fontSize: "0.8em" }} onAccept={handleOnAccept}>
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
       <div className={indexStyle.header} />
       <div className={indexStyle.container}>
         <div className={indexStyle.subContainer}>
-          <h1 className={indexStyle.title}>Raw Food Kids</h1>
+          <h1 className={indexStyle.title}>{siteTitle}</h1>
           <h3 className={indexStyle.subTitle}>~ Vegan Recipes ~</h3>
           <Search handleOnChange={handleOnChange} handleOnFocus={handleOnFocus} handleOnKeyDown={handleOnKeyDown} />
           <div className={indexStyle.recipes}>
