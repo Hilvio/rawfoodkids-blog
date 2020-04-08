@@ -12,7 +12,11 @@ const BlogIndex = ({ data, location }) => {
   const allPosts = data.allContentfulPost.edges;
   const [filteredPosts, setPosts] = useState(allPosts)
   const handleOnChange = event => {
-    const posts = allPosts.filter(({ node }) => node.title.toLowerCase().includes(event.target.value.toLowerCase()));
+    const searchWord = event.target.value.toLowerCase();
+    const posts = allPosts.filter(({ node }) => {
+      return node.title.toLowerCase().includes(searchWord) 
+      || (node.tags && node.tags.map(tag => tag.trim().toLowerCase()).includes(searchWord));
+    });
     setPosts(posts)
   }
   const handleOnKeyDown = event => {
@@ -41,7 +45,7 @@ const BlogIndex = ({ data, location }) => {
         const titleMatch = node.title.toLowerCase().includes(searchWord.toLowerCase());
         const tagMatch = node.tags ? node.tags.map(tag => tag.trim()).includes(searchWord.trim()) : false;
         return  titleMatch || tagMatch;
-      }) : filteredPosts;
+      }) : allPosts;
       setPosts(posts);
     } else {
       setPosts(allPosts)

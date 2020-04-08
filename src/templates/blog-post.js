@@ -42,7 +42,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         </div>
         <div style={{ display: "flex"}}>
           <p>
-          { post.tags && post.tags.map((tag, index) => <Link key={index} to={`?search=${tag}`} style={{ marginRight: "10px"}}>{tag}</Link>) }
+          { post.tags && post.tags.map(tag => tag.trim()).map((tag, index) => <Link key={index} to={`?search=${tag}`} style={{ marginRight: "10px"}}>{tag}</Link>) }
           </p>
         </div>
         <div style={{ display: "flex"}}>
