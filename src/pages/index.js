@@ -37,12 +37,11 @@ const BlogIndex = ({ data, location }) => {
     if (location.search) {
       const searchParams = new URLSearchParams(location.search);
       const searchWord = searchParams.get('search')
-      const posts = searchWord && allPosts.filter(({ node }) => {
+      const posts = searchWord ? allPosts.filter(({ node }) => {
         const titleMatch = node.title.toLowerCase().includes(searchWord.toLowerCase());
         const tagMatch = node.tags ? node.tags.map(tag => tag.trim()).includes(searchWord.trim()) : false;
-        console.log({ tags: node.tags, searchWord})
         return  titleMatch || tagMatch;
-      });
+      }) : filteredPosts;
       setPosts(posts);
     } else {
       setPosts(allPosts)
@@ -50,8 +49,7 @@ const BlogIndex = ({ data, location }) => {
     
   }, [ allPosts, location ]);
 
-  const NewPost = ({ createdAt, image, slug, subtitle, title }) => {
-    const header = title || slug
+  const NewPost = ({ image, slug, title }) => {
     const img = image ? <Img className={indexStyle.recipeImage} fluid={image.fluid} alt={image.title}/> : undefined;
 
     return (
