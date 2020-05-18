@@ -5,7 +5,7 @@ module.exports = {
     title: `Raw Food Kids`,
     author: `Lucia Hirvi`,
     description: `A raw vegan food blog`,
-    siteUrl: `https://rawfoodkids.netlify.com/`,
+    siteUrl: `https://rawfoodkids.netlify.app/`,
     social: {
       instagram: `rawfoodkids`,
     },
@@ -34,6 +34,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
@@ -47,8 +48,27 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        headers: {
+          "/public/**/*.html": [
+            "cache-control: public",
+            "cache-control: max-age=0", 
+            "cache-control: must-revalidate"
+          ],
+          "/public/page-data/**/*.json": [
+            "cache-control: public",
+            "cache-control: max-age=0", 
+            "cache-control: must-revalidate"
+          ],
+          "/static/*": [
+            "cache-control: public",
+            "cache-control: max-age=31536000", 
+            "cache-control: immutable"
+          ]
+        }
+      }
+    }
   ],
 }
