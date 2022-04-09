@@ -22,7 +22,7 @@
     "gatsby-source-contentful": "^2.1.86",
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-transformer-sharp": "^2.3.14",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "prismjs": "^1.19.0",
     "react": "^16.12.0",
     "react-cookie-consent": "^3.0.0",
